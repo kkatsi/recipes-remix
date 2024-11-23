@@ -45,17 +45,17 @@ const Recipe = () => {
   if (isFetching || !recipe) return <>loading...</>;
 
   return (
-    <div className="main-background justify-center flex flex-col gap-4 min-h-screen w-full p-6 sm:p-12">
-      <NavLinkWithReactQueryPrefetcher
-        viewTransition
-        to="/"
-        prefetchQueryOptions={{ queryKey: ['recipes'], queryFn: fetchRecipes }}
-        className="bg-transparent outline-0 border-0 flex items-center gap-2 w-fit underline"
-      >
-        <BackButton className="w-6 h-6" />
-        <span className="text-sm">Back to home</span>
-      </NavLinkWithReactQueryPrefetcher>
-      <div className="container">
+    <div className="main-background flex justify-center min-h-screen w-full p-6 sm:p-12">
+      <div className="container justify-center margin-auto flex flex-col gap-4">
+        <NavLinkWithReactQueryPrefetcher
+          viewTransition
+          to="/"
+          prefetchQueryOptions={{ queryKey: ['recipes'], queryFn: fetchRecipes }}
+          className="container bg-transparent outline-0 border-0 flex items-center gap-2 w-fit underline"
+        >
+          <BackButton className="w-6 h-6" />
+          <span className="text-sm">Back to home</span>
+        </NavLinkWithReactQueryPrefetcher>
         <div
           className="overflow-hidden relative border-[0.5px] border-zinc-100"
           style={{ viewTransitionName: 'recipe-image' }}
