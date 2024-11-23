@@ -18,6 +18,7 @@ You can explore the app [here](https://tasty-recipes-dzl9.onrender.com/)
 
 - Frontend: Built with React and Tailwind CSS, using Remix as the framework for handling routing, data loading, and server-side rendering.
 - Backend: Express.js server for handling API routes and server-side logic.
+- API: The app fetches data from the DummyJSON public API, which provides a wide range of sample recipe data.
 - Data Fetching & State Management: React Query for efficient data management, including caching, background syncing, and pagination.
 - View Transitions: View Transition API for smooth transitions between pages, making the user experience more dynamic and engaging.
 - Meta Tags: Dynamic SEO meta tags for Open Graph and Twitter cards to enhance social media sharing and search engine discoverability.
@@ -27,6 +28,12 @@ You can explore the app [here](https://tasty-recipes-dzl9.onrender.com/)
 - Client-Side Rendering (CSR): Once the initial page is loaded, the app takes advantage of React and React Query to handle all subsequent page navigations on the client side. This means that when a user navigates to a different page, only the necessary data is fetched, and the page updates without a full page reload, ensuring a fast and fluid experience.
 
 This setup allows for hybrid rendering, where you get the benefits of SSR for the initial load and CSR for seamless in-app navigation.
+
+## DummyJSON API
+- DummyJSON is a free and publicly available API that serves a wide range of dummy data, including recipes. In this project, it is used as the backend to provide recipe data to the app.
+- The app makes HTTP requests to fetch a list of recipes, detailed recipe data, and metadata such as images and descriptions.
+
+You can learn more about the DummyJSON API [here](https://dummyjson.com/)
 
 ## License
 
