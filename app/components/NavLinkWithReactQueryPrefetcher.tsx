@@ -1,14 +1,14 @@
-import { Link, LinkProps } from '@remix-run/react';
+import { NavLink, NavLinkProps } from '@remix-run/react';
 import { FetchQueryOptions, useQueryClient } from '@tanstack/react-query';
 import React, { useRef } from 'react';
 import useOnScreen from '~/hooks/useOnScreen';
 import { isBrowser } from '~/utils';
 
-interface LinkWithReactQueryPrefetcherProps extends Omit<LinkProps, 'prefetch'> {
+interface NavLinkWithReactQueryPrefetcherProps extends Omit<NavLinkProps, 'prefetch'> {
   prefetchOptions: FetchQueryOptions;
 }
 
-const LinkWithReactQueryPrefetcher: React.FC<LinkWithReactQueryPrefetcherProps> = ({
+const NavLinkWithReactQueryPrefetcher: React.FC<NavLinkWithReactQueryPrefetcherProps> = ({
   prefetchOptions,
   children,
   ...props
@@ -29,10 +29,10 @@ const LinkWithReactQueryPrefetcher: React.FC<LinkWithReactQueryPrefetcherProps> 
   };
 
   return (
-    <Link {...props} ref={linkRef} onMouseEnter={handlePrefetch}>
+    <NavLink {...props} ref={linkRef} onMouseEnter={handlePrefetch}>
       {children}
-    </Link>
+    </NavLink>
   );
 };
 
-export default LinkWithReactQueryPrefetcher;
+export default NavLinkWithReactQueryPrefetcher;

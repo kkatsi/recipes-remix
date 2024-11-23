@@ -27,4 +27,7 @@ export const pluralize = (word: string, count: number) => {
 export const replaceSpacesWithHyphensAndMakeLowercase = (text: string) =>
   text.replaceAll(' ', '-').toLowerCase();
 
+export const extractIdFromRecipeParameter = (text: string) =>
+  text.split('-')[text.split('-').length - 1];
+
 export const isBrowser = () => typeof window !== 'undefined';

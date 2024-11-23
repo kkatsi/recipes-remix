@@ -19,6 +19,7 @@ export function clientLoader() {
 
 export default function Index() {
   const { data, isFetching } = useQuery({
+    staleTime: Infinity,
     queryKey: ['recipes'],
     queryFn: fetchRecipes,
   });
@@ -26,7 +27,7 @@ export default function Index() {
   if (isFetching || !data) return <>loading...</>;
 
   return (
-    <div className="main-background flex h-screen items-center justify-center flex-col gap-4 py-4">
+    <div className="main-background flex min-h-screen items-center justify-center flex-col gap-4 py-4">
       <h1 className="font-playfair text-[3rem] sm:text-[6rem] font-extrabold text-center leading-none tracking-wide px-4">
         Simple and
         <br />
@@ -37,8 +38,8 @@ export default function Index() {
         wholesome meals to decadent treats, find inspiration for every occasion and share the joy of
         cooking with your loved ones. Perfect for foodies and beginners alike!
       </span>
-      <div className="flex w-full my-0 -mx-8 overflow-x-auto mt-4">
-        <div className="flex space-x-8 w-auto mx-8 p-0 items-stretch pb-4">
+      <div className="flex sm:flex-row w-full my-0 -mx-8 sm:overflow-x-auto mt-4">
+        <div className="flex flex-col sm:flex-row space-y-8 sm:space-y-0 sm:space-x-8 w-full sm:w-auto sm:my-0 sm:mx-8 p-0 items-center sm:items-stretch pb-4">
           {data.recipes.map((recipe) => (
             <RecipeCard recipe={recipe} key={recipe.id} />
           ))}

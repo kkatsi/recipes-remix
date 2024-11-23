@@ -10,3 +10,20 @@ body {}
     url('/assets/main-bg.webp');
   background-size: cover;
 }
+
+/* Handle the image transition for the new and old states */
+::view-transition-new(.recipe-image),
+::view-transition-old(.recipe-image) {
+  aspect-ratio: 3 / 1;
+  /* Aspect ratio to match the recipe page */
+  width: 100%;
+  /* Ensure it scales properly */
+  object-fit: cover;
+  /* Maintain proper fit for the image */
+  object-position: center;
+  /* Center the image within the container */
+  border-radius: 0;
+  /* Remove the circular border for the recipe page */
+  height: auto;
+  /* Allow it to scale dynamically */
+}
