@@ -3,10 +3,10 @@
 @tailwind utilities;
 
 html,
-body {
-  @apply bg-white dark:bg-gray-950;
+body {}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+.main-background {
+  background: left linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+    url('/assets/main-bg.webp');
+  background-size: cover;
 }
