@@ -22,9 +22,6 @@ export default {
       boxShadow: {
         '3xl': ['rgb(38, 57, 77) 0px 20px 30px -10px'],
       },
-      colors: {
-        primary: '#d39738',
-      },
     },
   },
   plugins: [],

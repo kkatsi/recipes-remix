@@ -1,6 +1,8 @@
 import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { fetchRecipes } from './service';
 import RecipeCard from './components/RecipeCard';
+import { MetaFunction } from '@remix-run/react';
+import { formatMeta } from './meta';
 
 export async function loader() {
   const queryClient = new QueryClient();
@@ -10,8 +12,17 @@ export async function loader() {
     queryFn: fetchRecipes,
   });
 
-  return Response.json({ dehydratedState: dehydrate(queryClient) });
+  return { dehydratedState: dehydrate(queryClient) };
 }
+
+export const meta: MetaFunction<typeof loader> = ({ data }) => {
+  const recipesQuery = data?.dehydratedState?.queries?.find(
+    (query) => query.queryKey[0] === 'recipes'
+  );
+
+  const recipes = recipesQuery?.state?.data;
+  return formatMeta(recipes);
+};
 
 export function clientLoader() {
   return null;

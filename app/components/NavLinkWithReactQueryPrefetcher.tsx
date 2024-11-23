@@ -1,15 +1,29 @@
 import { NavLink, NavLinkProps } from '@remix-run/react';
-import { FetchQueryOptions, useQueryClient } from '@tanstack/react-query';
+import { FetchQueryOptions, useQueryClient, SetDataOptions } from '@tanstack/react-query';
 import React, { useRef } from 'react';
 import useOnScreen from '~/hooks/useOnScreen';
 import { isBrowser } from '~/utils';
 
-interface NavLinkWithReactQueryPrefetcherProps extends Omit<NavLinkProps, 'prefetch'> {
-  prefetchOptions: FetchQueryOptions;
-}
+type PrefetchQueryOptions = {
+  prefetchQueryOptions: FetchQueryOptions;
+  setQueryOptions?: never;
+};
+
+type SetQueryDataOptions = {
+  prefetchQueryOptions?: never;
+  setQueryOptions: {
+    queryKey: FetchQueryOptions['queryKey'];
+    updater: unknown;
+    options?: SetDataOptions;
+  };
+};
+
+type NavLinkWithReactQueryPrefetcherProps = Omit<NavLinkProps, 'prefetch'> &
+  (PrefetchQueryOptions | SetQueryDataOptions);
 
 const NavLinkWithReactQueryPrefetcher: React.FC<NavLinkWithReactQueryPrefetcherProps> = ({
-  prefetchOptions,
+  prefetchQueryOptions,
+  setQueryOptions,
   children,
   ...props
 }) => {
@@ -23,9 +37,14 @@ const NavLinkWithReactQueryPrefetcher: React.FC<NavLinkWithReactQueryPrefetcherP
 
   const queryClient = useQueryClient();
   const handlePrefetch = () => {
-    queryClient.prefetchQuery({
-      ...prefetchOptions,
-    });
+    if (prefetchQueryOptions) {
+      queryClient.prefetchQuery({
+        ...prefetchQueryOptions,
+      });
+    } else if (setQueryOptions) {
+      const { queryKey, updater, options } = setQueryOptions;
+      queryClient.setQueryData(queryKey, updater, options);
+    }
   };
 
   return (

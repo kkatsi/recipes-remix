@@ -1,6 +1,5 @@
 import React from 'react';
 import NavLinkWithReactQueryPrefetcher from '~/components/NavLinkWithReactQueryPrefetcher';
-import { fetchRecipe } from '~/routes/$recipe/service';
 import { Recipe } from '~/types';
 import { pluralize, replaceSpacesWithHyphensAndMakeLowercase } from '~/utils';
 
@@ -13,7 +12,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
     <NavLinkWithReactQueryPrefetcher
       className="w-[250px] sm:w-[200px] flex flex-col items-center relative"
       to={`/${replaceSpacesWithHyphensAndMakeLowercase(recipe.name)}-${recipe.id}`}
-      prefetchOptions={{ queryKey: [`recipe${recipe.id}`], queryFn: () => fetchRecipe(recipe.id) }}
+      setQueryOptions={{ queryKey: [`recipe${recipe.id}`], updater: recipe }}
       viewTransition
     >
       {({ isTransitioning }) => (
@@ -31,7 +30,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
                 {recipe.caloriesPerServing} calories
               </span>
             </div>
-            <hr className="h-[2px] bg-gray-300 w-full my-4" />
+            <hr className="h-[1px] border-0 bg-gray-300 w-full my-4" />
             <div className="flex w-full justify-between mt-auto">
               <div className="flex flex-col">
                 <span className="text-xs text-gray-400">Time</span>
@@ -40,7 +39,7 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
                 </span>
               </div>
               <div className="flex flex-col text-end">
-                <span className="text-xs text-gray-400">Portion</span>
+                <span className="text-xs text-gray-400">Yield</span>
                 <span className="text-xs font-medium">
                   {recipe.servings} {pluralize('serving', recipe.servings)}
                 </span>
