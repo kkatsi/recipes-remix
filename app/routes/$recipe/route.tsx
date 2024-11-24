@@ -1,12 +1,10 @@
 import { LoaderFunctionArgs } from '@remix-run/node';
-import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
-import { fetchRecipe } from './service';
 import { MetaFunction, useParams } from '@remix-run/react';
+import { dehydrate, QueryClient, useQuery } from '@tanstack/react-query';
 import { extractIdFromRecipeParameter } from '~/utils';
-import BackButton from '~/assets/arrow-back.svg?react';
-import NavLinkWithReactQueryPrefetcher from '~/components/NavLinkWithReactQueryPrefetcher';
-import { fetchRecipes } from '../_index/service';
+import BackToHomeButton from './components/BackToHomeButton';
 import { formatMeta } from './meta';
+import { fetchRecipe } from './service';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const queryClient = new QueryClient();
@@ -47,15 +45,7 @@ const Recipe = () => {
   return (
     <div className="main-background flex justify-center min-h-screen w-full p-6 sm:p-12">
       <div className="container justify-center margin-auto flex flex-col gap-4">
-        <NavLinkWithReactQueryPrefetcher
-          viewTransition
-          to="/"
-          prefetchQueryOptions={{ queryKey: ['recipes'], queryFn: fetchRecipes }}
-          className="container bg-transparent outline-0 border-0 flex items-center gap-2 w-fit underline"
-        >
-          <BackButton className="w-6 h-6" />
-          <span className="text-sm">Back to home</span>
-        </NavLinkWithReactQueryPrefetcher>
+        <BackToHomeButton />
         <div
           className="overflow-hidden relative border-[0.5px] border-zinc-100"
           style={{ viewTransitionName: 'recipe-image' }}
