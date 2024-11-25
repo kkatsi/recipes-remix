@@ -4,6 +4,8 @@ import { Recipe } from '~/types';
 export const formatMeta = (data?: Recipe): MetaDescriptor[] => {
   const defaultDescription = 'This recipe does not exist.';
 
+  console.log(data);
+
   if (!data) {
     return [
       { title: 'Recipe Not Found' },

@@ -5,6 +5,7 @@ import { extractIdFromRecipeParameter } from '~/utils';
 import BackToHomeButton from './components/BackToHomeButton';
 import { formatMeta } from './meta';
 import { fetchRecipe } from './service';
+import { useEffect } from 'react';
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const queryClient = new QueryClient();
@@ -38,6 +39,10 @@ const Recipe = () => {
     staleTime: Infinity,
     queryKey: [`recipe${recipeId}`],
     queryFn: () => fetchRecipe(Number(recipeId)),
+  });
+
+  useEffect(() => {
+    if (recipe) document.title = `${recipe.name} | Tasty Recipes`;
   });
 
   if (isFetching || !recipe) return <>loading...</>;
